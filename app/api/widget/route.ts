@@ -9,7 +9,7 @@ export async function GET() {
       if (!shop || !productId) return;
 
       // ABSOLUTE URL - FIXED
-      const res = await fetch("https://229ff28f431c.ngrok-free.app/api/reviews?shop=" + shop + "&product=" + productId);
+      const res = await fetch("https://shopify-review-app-template.vercel.app/api/reviews?shop=" + shop + "&product=" + productId);
       let data = [];
       try {
         data = await res.json();
@@ -44,7 +44,7 @@ export async function GET() {
         const fd = new FormData(form);
         const obj = Object.fromEntries(fd.entries());
 
-        await fetch("https://229ff28f431c.ngrok-free.app/api/reviews/submit", {
+        await fetch("https://shopify-review-app-template.vercel.app/api/reviews/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(obj),
