@@ -9,12 +9,26 @@ export async function GET(req: NextRequest) {
   const productId = searchParams.get('product');
 
   if (!shop || !productId) {
-    return NextResponse.json([], { status: 200 });
+    return new NextResponse(JSON.stringify([]), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Or restrict to Shopify store origin
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   const shopRecord = await prisma.shop.findUnique({ where: { shop } });
   if (!shopRecord) {
-    return NextResponse.json([], { status: 200 });
+    return new NextResponse(JSON.stringify([]), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   const reviews = await prisma.review.findMany({
@@ -22,5 +36,12 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: 'desc' },
   });
 
-  return NextResponse.json(reviews);
+  return new NextResponse(JSON.stringify(reviews), {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Replace * with your Shopify store domain for tighter security
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Content-Type': 'application/json',
+    },
+  });
 }
