@@ -6,6 +6,7 @@ export async function GET() {
       const container = document.getElementById("my-reviews-widget");
       const shop = container?.dataset.shop;
       const productId = container?.dataset.productId;
+      console.log("Shop:", shop, "Product ID:", productId);
       if (!shop || !productId) return;
 
       // ABSOLUTE URL - FIXED
