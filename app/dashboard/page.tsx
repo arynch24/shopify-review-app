@@ -13,7 +13,7 @@ export default async function Dashboard({ searchParams }: any) {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Reviews</h1>
-            jinda hu mai
+            jinda hu mai schhhhh me
             {reviews.map((r: any) => (
                 <div key={r.id} className="border p-4 mb-2 rounded">
                     <p><strong>{'⭐'.repeat(r.rating)}</strong></p>
